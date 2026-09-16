@@ -1,0 +1,24 @@
+# Rust
+**/target/
+**/*.rs.bk
+Cargo.lock
+
+# Python & uv
+**/__pycache__/
+**/*.py[cod]
+*$py.class
+**/.venv/
+**/.uv/
+
+# Typst & Salidas generadas
+**/output/
+**/*.pdf
+**/*.png
+!**/assets/*.png
+!**/assets/*.svg
+
+# Logs y temporales
+*.log
+.DS_Store
+.vscode/
+.idea/

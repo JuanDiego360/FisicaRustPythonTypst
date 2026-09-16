@@ -1,0 +1,35 @@
+# ==============================================================================
+# CALCOLADORA DE CAMPO ELECTROSTÁTICO - ARCHIVO DE ENTRADA (datos.txt)
+# ==============================================================================
+# INSTRUCCIONES:
+#
+# 1. Punto donde se calcula el campo eléctrico:
+#    PUNTO: <x> <y> <z>
+#    (o en 2D: PUNTO: <x> <y>)
+#
+# 2. Cargas eléctricas:
+#    CARGAS:
+#    <x> <y> <z> <q_Coulombs> [etiqueta_opcional]
+#    (o en 2D: <x> <y> <q_Coulombs> [etiqueta_opcional])
+#
+# COMPORTAMIENTO INTELIGENTE 2D / 3D:
+# - Si todas las coordenadas z son 0 (o se omiten), el sistema opera en MODO 2D:
+#   los cálculos vectoriales y las gráficas se adaptan automáticamente al plano XY.
+# - Si al menos una coordenada z != 0, el sistema conmuta automáticamente a MODO 3D:
+#   con visualización tridimensional en perspectiva y componentes completas en Z.
+#
+# UNIDADES:
+# - Coordenadas (x, y, z): metros [m]
+# - Cargas (q): Coulombs [C]. Soporta notación científica, por ejemplo:
+#     3.0e-6   =  3.0 microCoulombs (µC)
+#    -2.5e-6   = -2.5 microCoulombs (µC)
+#     1.0e-9   =  1.0 nanoCoulombs (nC)
+# ==============================================================================
+
+PUNTO: 0.0  0.2  0.0
+
+CARGAS:
+#   x        y        z        q (C)        nombre
+  -0.2      0.0      0.0      3.0e-6        q1
+   0.2      0.0      0.0     -3.0e-6        q2
+   0.0     -0.2      0.0      1.5e-6        q3
