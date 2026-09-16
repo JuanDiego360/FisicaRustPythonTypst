@@ -149,18 +149,47 @@ FisicaRustPythonTyspt/
 
 ---
 
+---
+
+## ⚡ ¿Cómo usar el binario ya construido sin recompilar Rust cada vez?
+
+Una de las grandes ventajas de esta arquitectura es que **no necesitas recompilar el código de Rust cada vez que cambias los datos del ejercicio**:
+
+1. **Si solo modificas `datos.txt` (cambias cargas o el punto $P$):**
+   ```bash
+   mise run all
+   # o si solo quieres ver los números en la terminal:
+   mise run calc
+   ```
+   Mise detectará que el binario `target/release/electrostatic_calc` ya existe y **lo ejecutará directamente en microsegundos**, omitiendo cualquier llamada innecesaria a Cargo.
+
+2. **Si modificas el código fuente en Rust (`src/main.rs`) y quieres recompilarlo:**
+   ```bash
+   mise run build
+   ```
+   Compilará de nuevo el motor en modo optimizado `--release`.
+
+3. **Si quieres forzar una recompilación totalmente limpia desde cero:**
+   ```bash
+   mise run rebuild
+   ```
+
+---
+
 ## 🛠️ Comandos de Mise por Proyecto
 
-Dentro de la carpeta de cualquier proyecto, Mise te proporciona los siguientes comandos estándar:
+Dentro de la carpeta de cualquier proyecto, dispones de los siguientes comandos de control:
 
-| Comando           | Acción                                                                                          |
-| :---------------- | :---------------------------------------------------------------------------------------------- |
-| `mise run all`    | Ejecuta el pipeline completo de principio a fin (construye, calcula, grafica y compila el PDF). |
-| `mise run calc`   | Ejecuta únicamente los cálculos matemáticos con Rust y muestra el resumen en consola.           |
-| `mise run plot`   | Genera o actualiza la gráfica con Python (2D/3D).                                               |
-| `mise run report` | Compila el informe técnico en PDF con Typst.                                                    |
-| `mise run open`   | Abre el PDF generado en el visor predeterminado del sistema.                                    |
-| `mise run clean`  | Limpia los binarios y archivos temporales (`target/` y `output/`).                              |
+| Comando | Acción |
+| :--- | :--- |
+| `mise run all` | Ejecuta el pipeline completo usando el binario existente (sin recompilar si ya está listo). |
+| `mise run calc` | Ejecuta únicamente los cálculos con el binario ya construido (solo compila la primera vez si no existe). |
+| `mise run build` | **Compila o recompila el motor de Rust** en modo `--release` (usar solo si editas archivos en `src/`). |
+| `mise run rebuild` | Limpia la caché y fuerza la **recompilación desde cero** de Rust (`cargo clean && cargo build --release`). |
+| `mise run plot` | Genera o actualiza la gráfica con Python (2D/3D). |
+| `mise run report` | Compila el informe técnico en PDF con Typst. |
+| `mise run open` | Abre el PDF generado en el visor predeterminado del sistema. |
+| `mise run clean` | Limpia los binarios y archivos temporales (`target/` y `output/`). |
 
 ---
 

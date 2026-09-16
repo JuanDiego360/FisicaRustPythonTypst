@@ -2,7 +2,7 @@
 # CONFIGURACIÓN DE TAREAS MISE - SIMULADOR ELECTROSTÁTICO ULTRA EFICIENTE
 # ==============================================================================
 # Pipeline de ejecución:
-#   datos.txt ──> [Rust: Cálculo Vectorial] ──> output/calculo.json
+#   datos.txt ──> [Rust: Binario precompilado] ──> output/calculo.json
 #                         │
 #                         ▼
 #                 [Python: Matplotlib 2D/3D] ──> output/campo_electrico.png
@@ -12,13 +12,18 @@
 # ==============================================================================
 
 [tasks.build]
-description = "Compila el motor electrostático en Rust en modo --release para máxima eficiencia"
+description = "Compila o recompila el motor de Rust en modo --release (solo necesario si modificas el código en src/)"
+sources = ["src/**/*.rs", "Cargo.toml"]
+outputs = ["target/release/electrostatic_calc"]
 run = "cargo build --release"
 
+[tasks.rebuild]
+description = "Fuerza la recompilación completa de Rust desde cero"
+run = "cargo clean && cargo build --release"
+
 [tasks.calc]
-description = "Calcula los campos electrostáticos paso a paso a partir de datos.txt"
-depends = ["build"]
-run = "./target/release/electrostatic_calc datos.txt output/calculo.json"
+description = "Ejecuta los cálculos con el binario ya construido (si no existe, lo compila una sola vez)"
+run = "([ -f target/release/electrostatic_calc ] || cargo build --release) && ./target/release/electrostatic_calc datos.txt output/calculo.json"
 
 [tasks.plot]
 description = "Genera la gráfica 2D o 3D con Python y matplotlib"
@@ -31,7 +36,7 @@ depends = ["plot"]
 run = "typst compile informe.typ output/reporte_campo_electrico.pdf"
 
 [tasks.all]
-description = "Ejecuta todo el pipeline: build -> calc -> plot -> report"
+description = "Ejecuta el pipeline completo usando el binario existente (sin recompilar si ya está listo)"
 depends = ["report"]
 run = """
 echo ""
@@ -48,5 +53,5 @@ description = "Abre el reporte PDF generado con el visor del sistema"
 run = "xdg-open output/reporte_campo_electrico.pdf 2>/dev/null || echo 'Abre el archivo: output/reporte_campo_electrico.pdf'"
 
 [tasks.clean]
-description = "Elimina los artefactos y archivos generados"
+description = "Elimina los artefactos generados (output y target)"
 run = "rm -rf output target"
