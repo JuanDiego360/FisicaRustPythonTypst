@@ -33,7 +33,7 @@ El propósito de este repositorio es albergar múltiples proyectos y ejercicios 
 1. **🦀 Rust (Motor Numérico Ultra Rápido):**
    - Se encarga del parseo de datos de entrada, álgebra vectorial, resolución de ecuaciones físicas con precisión en coma flotante `f64` y exportación estructurada a formato JSON en sub-milisegundos.
 2. **🐍 Python + Matplotlib + Numpy (`uv`):**
-   - Se encarga del trazado y visualización científica (campos vectoriales, líneas de flujo *streamplot*, distribuciones de cargas, proyecciones espaciales 3D). Gestionado de forma instantánea y reproducible mediante `uv` (sin necesidad de crear ni activar entornos virtuales manualmente).
+   - Se encarga del trazado y visualización científica (campos vectoriales, líneas de flujo _streamplot_, distribuciones de cargas, proyecciones espaciales 3D). Gestionado de forma instantánea y reproducible mediante `uv` (sin necesidad de crear ni activar entornos virtuales manualmente).
 3. **📄 Typst (Generación de Documentos Académicos):**
    - El estándar moderno para tipografía científica que compila en milisegundos. Lee directamente los datos generados y monta un informe en PDF con planteamiento, marco teórico, desglose algebraico paso a paso para cada elemento, ecuaciones matemáticas impecables, tablas comparativas y la gráfica final embebida.
 4. **🛠️ Mise (Gestor de Herramientas y Tareas):**
@@ -135,14 +135,16 @@ FisicaRustPythonTyspt/
 
 - **Descripción:** Calcula el vector de campo electrostático $\vec{E}$ generado por cualquier número de cargas puntuales sobre un punto arbitrario $P$, aplicando la Ley de Coulomb y el Principio de Superposición.
 - **Comportamiento adaptativo:**
-  - Si todas las coordenadas $z = 0$, opera en **Modo 2D** (gráfica en plano $XY$, líneas de flujo *streamlines* de fondo, polaridad con halos y ángulo $\theta$).
+  - Si todas las coordenadas $z = 0$, opera en **Modo 2D** (gráfica en plano $XY$, líneas de flujo _streamlines_ de fondo, polaridad con halos y ángulo $\theta$).
   - Si alguna coordenada $z \neq 0$, conmuta a **Modo 3D** (perspectiva espacial con proyecciones ortogonales al piso y vectores en 3D).
 - **Cómo usarlo:**
+
   ```bash
   cd CalculoCampoElectrostaticos
   # Edita datos.txt con tus cargas y punto P
   mise run all
   ```
+
   El reporte PDF completo se genera en `CalculoCampoElectrostaticos/output/reporte_campo_electrico.pdf`.
 
 ---
@@ -151,38 +153,14 @@ FisicaRustPythonTyspt/
 
 Dentro de la carpeta de cualquier proyecto, Mise te proporciona los siguientes comandos estándar:
 
-| Comando | Acción |
-| :--- | :--- |
-| `mise run all` | Ejecuta el pipeline completo de principio a fin (construye, calcula, grafica y compila el PDF). |
-| `mise run calc` | Ejecuta únicamente los cálculos matemáticos con Rust y muestra el resumen en consola. |
-| `mise run plot` | Genera o actualiza la gráfica con Python (2D/3D). |
-| `mise run report` | Compila el informe técnico en PDF con Typst. |
-| `mise run open` | Abre el PDF generado en el visor predeterminado del sistema. |
-| `mise run clean` | Limpia los binarios y archivos temporales (`target/` y `output/`). |
-
----
-
-## 🌐 Configuración del Repositorio Remoto en GitHub
-
-Para subir este proyecto a tu repositorio de GitHub (`git@github.com:JuanDiego360/FisicaRustPythonTyspt.git`):
-
-```bash
-# 1. Inicializar git en la raíz del proyecto (si no está inicializado)
-git init
-
-# 2. Configurar la rama principal
-git branch -M main
-
-# 3. Vincular el repositorio remoto de GitHub
-git remote add origin git@github.com:JuanDiego360/FisicaRustPythonTyspt.git
-
-# 4. Añadir los archivos y realizar el primer commit
-git add .
-git commit -m "feat: estructura inicial con proyecto de campo electrostático 2D/3D en Rust, Python, Typst y Mise"
-
-# 5. Subir a GitHub
-git push -u origin main
-```
+| Comando           | Acción                                                                                          |
+| :---------------- | :---------------------------------------------------------------------------------------------- |
+| `mise run all`    | Ejecuta el pipeline completo de principio a fin (construye, calcula, grafica y compila el PDF). |
+| `mise run calc`   | Ejecuta únicamente los cálculos matemáticos con Rust y muestra el resumen en consola.           |
+| `mise run plot`   | Genera o actualiza la gráfica con Python (2D/3D).                                               |
+| `mise run report` | Compila el informe técnico en PDF con Typst.                                                    |
+| `mise run open`   | Abre el PDF generado en el visor predeterminado del sistema.                                    |
+| `mise run clean`  | Limpia los binarios y archivos temporales (`target/` y `output/`).                              |
 
 ---
 
