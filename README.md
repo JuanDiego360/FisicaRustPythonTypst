@@ -67,15 +67,23 @@ sudo pacman -S mise
 
 ### 🟠 Debian / Ubuntu / Linux Mint
 
-En Debian y derivadas basadas en `apt`:
+En Debian y derivadas basadas en `apt`, herramientas como `cargo` **no vienen preinstaladas** en el sistema ni se incluyen dentro del metapaquete `build-essential`. Debes instalarlas explícitamente:
 
 ```bash
-# 1. Actualizar paquetes e instalar dependencias básicas
+# 1. Actualizar paquetes e instalar dependencias básicas del sistema
 sudo apt update && sudo apt install -y curl wget git build-essential
 
-# 2. Instalar Rust y Cargo (método recomendado oficial via rustup)
+# 2. Instalar Cargo y Rust:
+# -------------------------------------------------------------------------
+# • OPCIÓN A (Directo desde los repositorios de Debian con APT):
+sudo apt install -y cargo rustc
+
+# • OPCIÓN B (Oficial vía rustup, recomendada para tener la última versión estable):
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 source "$HOME/.cargo/env"
+# Añadir al perfil para que esté disponible en cada nueva terminal:
+echo 'source "$HOME/.cargo/env"' >> ~/.bashrc
+# -------------------------------------------------------------------------
 
 # 3. Instalar Python y uv (el gestor ultra rápido de paquetes de Python)
 sudo apt install -y python3 python3-pip
